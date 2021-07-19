@@ -13216,6 +13216,4 @@ document.querySelector('button').addEventListener('click', function() {
   beet.start();
 });
 
-// test commit
-
 },{"beet.js":1,"beet.js/lib/layer":3}]},{},[13]);
