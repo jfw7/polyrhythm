@@ -1,0 +1,15 @@
+{
+  "private": true,
+  "scripts": {
+    "serve": "beefy src/index.js:dist/bundle.js",
+    "build": "browserify src/index.js -o dist/bundle.js"
+  },
+  "dependencies": {
+    "beet.js": "^1.8.0"
+  },
+  "devDependencies": {
+    "beefy": "^2.1.8",
+    "browserify": "^17.0.0",
+    "watchify": "^4.0.0"
+  }
+}
