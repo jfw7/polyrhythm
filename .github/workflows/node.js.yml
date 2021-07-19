@@ -16,7 +16,6 @@ jobs:
         run: |
           yarn
           yarn build
-          mv index.html dist/index.html
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.6.2

@@ -89,3 +89,4 @@ typings/
 
 dist/*
 !dist/.gitkeep
+!dist/index.html

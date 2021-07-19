@@ -15,5 +15,3 @@ document.querySelector('button').addEventListener('click', function() {
   beet.add(new Layer(context, 60, beet.pattern(4), (time, step, timeFromScheduled) => setTimeout(() => document.getElementById('bpm60').append(++i60 + ' '), timeFromScheduled * 1000)));
   beet.start();
 });
-
-// test commit
