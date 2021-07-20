@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "serve": "beefy src/index.js:dist/bundle.js",
+    "serve": "beefy src/index.js:bundle.js --cwd dist",
     "build": "browserify src/index.js -o dist/bundle.js"
   },
   "dependencies": {
