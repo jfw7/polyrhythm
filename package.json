@@ -5,7 +5,8 @@
     "build": "browserify src/index.js -o dist/bundle.js"
   },
   "dependencies": {
-    "beet.js": "^1.8.0"
+    "beet.js": "^1.8.0",
+    "d3": "6"
   },
   "devDependencies": {
     "beefy": "^2.1.8",
