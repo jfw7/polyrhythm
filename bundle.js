@@ -33671,7 +33671,7 @@ document.querySelector('button').addEventListener('click', async function() {
   field.each((d, i, nodes) => {
     let started = false;
     let stopped = false;
-    const player = new Tone.Player(`/audio/${d.sample}`).toDestination();
+    const player = new Tone.Player(`audio/${d.sample}`).toDestination();
     const layer = beet.layer(
       d.pattern,
       (time, step, timeFromScheduled) => {
