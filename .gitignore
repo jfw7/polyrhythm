@@ -90,3 +90,4 @@ typings/
 dist/*
 !dist/.gitkeep
 !dist/*.html
+!dist/audio/
