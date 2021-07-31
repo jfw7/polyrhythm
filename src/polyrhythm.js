@@ -10,7 +10,7 @@ module.exports = ({ fields, tempo }) => {
   const width = 1000;
   const height = 800;
 
-  const radius = width / 2;
+  const radius = width / 1.75;
   const armRadius = radius / 22;
   const dotRadius = armRadius - 11;
 
