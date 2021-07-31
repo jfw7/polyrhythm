@@ -1,8 +1,10 @@
 {
   "private": true,
   "scripts": {
-    "serve": "beefy src/index.js:bundle.js --cwd dist",
-    "build": "browserify src/index.js -o dist/bundle.js"
+    "serve-1": "beefy src/1.js:1.js --cwd dist",
+    "build-1": "browserify src/1.js -o dist/1.js",
+    "serve-2": "beefy src/2.js:2.js --cwd dist",
+    "build-2": "browserify src/2.js -o dist/2.js"
   },
   "dependencies": {
     "beet.js": "^1.8.0",
