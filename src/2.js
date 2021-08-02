@@ -12,7 +12,6 @@ const fields = [
     pattern: 16,
     radius: 0.45,
     sample: 'Hat-Toefy.wav',
-    isMetro: true,
   },
   {
     color: '#004E7C',

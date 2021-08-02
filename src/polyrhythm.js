@@ -8,11 +8,11 @@ module.exports = ({ fields, tempo }) => {
   fields = fields.map(({ pattern, ...field }) => ({ ...field, pattern: new Pattern(pattern) }));
 
   const width = 1000;
-  const height = 800;
+  const height = 900;
 
-  const radius = width / 1.75;
+  const radius = width / 1.5;
   const armRadius = radius / 22;
-  const dotRadius = armRadius - 11;
+  const dotRadius = armRadius - 14;
 
   const svg = d3.select('body')
     .append('svg')
@@ -56,33 +56,38 @@ module.exports = ({ fields, tempo }) => {
     .style('color', ({ field: { color } }) => color)
     .style('transition', 'fill 50ms ease-out');
 
+
+    fieldTick.append('text')
+        .attr('dy', '0.35em')
+        .attr('fill', '#222')
+        .text(d => d.step);
+
+
   document.querySelector('button').addEventListener('click', async function() {
     await Tone.start();
 
-    const context = new AudioContext();
-    context.createOscillator();
-    const beet = new Beet({ context, tempo });
+    const beet = new Beet({ context: Tone.context, tempo });
 
     field.each(function(d) {
       let started = false;
       const player = new Tone.Player(`audio/${d.sample}`).toDestination();
-      let pulse = true;
       const layer = beet.layer(
         d.pattern,
         (time, step, timeFromScheduled) => {
           setTimeout(
             () => {
               player.start();
-              if (d.isMetro) {
-                field.select('.field-ring')
-                  // .attr('stroke-width', 1.5 * (pulse ? 1.2 : 1);
-              }
-              pulse = !pulse;
               d3.select(this)
                 .selectAll('.field-circle')
                 .attr(
                   'fill',
-                  (_, j) => j === (step - 1) ? "currentColor" : "white",
+                  (_, j) => j === (step - 1) ? 'currentColor' : 'white',
+                );
+              d3.select(this)
+                .selectAll('text')
+                .attr(
+                  'fill',
+                  (_, j) => j === (step - 1) ? '#ddd' : '#222',
                 );
             },
             timeFromScheduled * 1000,
@@ -100,6 +105,9 @@ module.exports = ({ fields, tempo }) => {
               d3.select(this)
                 .selectAll('.field-circle')
                 .attr('fill', 'white');
+              d3.select(this)
+                .selectAll('text')
+                .attr('fill', '#222');
             },
             timeFromScheduled * 1000,
           );
