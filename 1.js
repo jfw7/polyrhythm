@@ -33594,6 +33594,7 @@ const fields = [
     pattern: 32,
     radius: 0.45,
     sample: 'Hat-Toefy.wav',
+    isMetro: true,
   },
   {
     color: '#004E7C',
@@ -33609,9 +33610,16 @@ const fields = [
   },
 ];
 
-const tempo = 150 / 8;
+const tempo = 150;
 
-makePolyrhythm({ fields, tempo});
+const title = 'Meshuggah, “Perpetual Black Second”';
+
+const description = `
+  Circles from innermost to outermost: whole notes, half notes, quarter notes,
+  riff repetitions every 7 eighth notes (extended to 8 for the final statement).
+`
+
+makePolyrhythm({ description, fields, tempo, title });
 
 },{"./polyrhythm":46}],46:[function(require,module,exports){
 const Beet = require('beet.js');
@@ -33620,7 +33628,7 @@ const Pattern = require('beet.js/lib/pattern');
 const d3 = require('d3');
 const Tone = require('tone');
 
-module.exports = ({ fields, tempo }) => {
+module.exports = ({ description, fields, tempo, title }) => {
   fields = fields.map(({ pattern, ...field }) => ({ ...field, pattern: new Pattern(pattern) }));
 
   const width = 1000;
@@ -33631,12 +33639,26 @@ module.exports = ({ fields, tempo }) => {
   const dotRadius = armRadius - 14;
 
   const svg = d3.select('body')
+    .style('max-width', '1200px')
+    .append('main')
+    .style('display', 'flex')
+    .style('align-items', 'center')
     .append('svg')
     .attr('viewBox', [0, 0, width, height])
     .attr('text-anchor', 'middle')
+    .style('flex', '0 1 auto')
     .style('display', 'block')
     .style('max-height', '100vh')
-    .style('font', '500 12px sans-serif');
+    .style('font-size', '14px');
+
+    d3.select('main')
+      .append('div')
+      .style('flex', '0 0 400px')
+      .append('h3')
+      .text(title);
+    d3.select('main div')
+      .insert('p')
+      .text(description);
 
   const field = svg.append('g')
     .attr('transform', `translate(${width / 2},${height / 2})`)
@@ -33673,16 +33695,20 @@ module.exports = ({ fields, tempo }) => {
     .style('transition', 'fill 50ms ease-out');
 
 
-    fieldTick.append('text')
-        .attr('dy', '0.35em')
-        .attr('fill', '#222')
-        .text(d => d.step);
-
+  fieldTick.append('text')
+      .attr('dy', '0.35em')
+      .attr('fill', '#222')
+      .text(d => d.step);
 
   document.querySelector('button').addEventListener('click', async function() {
     await Tone.start();
 
-    const beet = new Beet({ context: Tone.context, tempo });
+    const metroField = fields.find(({ isMetro }) => isMetro) ?? fields[1];
+
+    const beet = new Beet({
+      context: Tone.context,
+      tempo: tempo / metroField.pattern.steps * 4,
+    });
 
     field.each(function(d) {
       let started = false;
