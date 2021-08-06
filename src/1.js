@@ -12,6 +12,7 @@ const fields = [
     pattern: 32,
     radius: 0.45,
     sample: 'Hat-Toefy.wav',
+    isMetro: true,
   },
   {
     color: '#004E7C',
@@ -27,6 +28,13 @@ const fields = [
   },
 ];
 
-const tempo = 150 / 8;
+const tempo = 150;
 
-makePolyrhythm({ fields, tempo});
+const title = 'Meshuggah, “Perpetual Black Second”';
+
+const description = `
+  Circles from innermost to outermost: whole notes, half notes, quarter notes,
+  riff repetitions every 7 eighth notes (extended to 8 for the final statement).
+`
+
+makePolyrhythm({ description, fields, tempo, title });

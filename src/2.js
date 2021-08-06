@@ -1,4 +1,4 @@
-const makePolyrhythm = require('./polyrhythm');
+const makePolyrhythm = require('./polyrhythm');;
 
 const fields = [
   {
@@ -12,6 +12,7 @@ const fields = [
     pattern: 16,
     radius: 0.45,
     sample: 'Hat-Toefy.wav',
+    isMetro: true,
   },
   {
     color: '#004E7C',
@@ -27,6 +28,13 @@ const fields = [
   },
 ];
 
-const tempo = 85 / 4;
+const tempo = 85;
 
-makePolyrhythm({ fields, tempo })
+const title = 'Animals As Leaders, “Wave of Babies”';
+
+const description = `
+  Circles from innermost to outermost: whole notes, half notes, quarter notes,
+  riff groupings measured in sixteenth notes: 5, 5, 9, 9, 7, 5, 5, 9, 10.
+`;
+
+makePolyrhythm({ description, fields, tempo, title })
