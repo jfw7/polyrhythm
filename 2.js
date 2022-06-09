@@ -33649,16 +33649,17 @@ module.exports = ({ description, fields, tempo, title }) => {
     .style('flex', '0 1 auto')
     .style('display', 'block')
     .style('max-height', '100vh')
+    .style('height', '100vh')
     .style('font-size', '14px');
 
-    d3.select('main')
-      .append('div')
-      .style('flex', '0 0 400px')
-      .append('h3')
-      .text(title);
-    d3.select('main div')
-      .insert('p')
-      .text(description);
+  d3.select('main')
+    .append('div')
+    .style('flex', '0 0 400px')
+    .append('h3')
+    .text(title);
+  d3.select('main div')
+    .insert('p')
+    .text(description);
 
   const field = svg.append('g')
     .attr('transform', `translate(${width / 2},${height / 2})`)
@@ -33680,11 +33681,11 @@ module.exports = ({ description, fields, tempo, title }) => {
       return d.range.map(step => ({ step: step + 1, field: d }));
     })
     .join('g')
-      .attr('class', 'field-tick')
-      .attr('transform', (d, i) => {
-        const angle = i / d.field.range.length * 2 * Math.PI - Math.PI / 2;
-        return `translate(${Math.cos(angle) * d.field.radius},${Math.sin(angle) * d.field.radius})`;
-      });
+    .attr('class', 'field-tick')
+    .attr('transform', (d, i) => {
+      const angle = i / d.field.range.length * 2 * Math.PI - Math.PI / 2;
+      return `translate(${Math.cos(angle) * d.field.radius},${Math.sin(angle) * d.field.radius})`;
+    });
 
   const fieldCircle = fieldTick.append('circle')
     .attr('class', 'field-circle')
@@ -33696,11 +33697,11 @@ module.exports = ({ description, fields, tempo, title }) => {
 
 
   fieldTick.append('text')
-      .attr('dy', '0.35em')
-      .attr('fill', '#222')
-      .text(d => d.step);
+    .attr('dy', '0.35em')
+    .attr('fill', '#222')
+    .text(d => d.step);
 
-  document.querySelector('button').addEventListener('click', async function() {
+  document.querySelector('button').addEventListener('click', async function () {
     await Tone.start();
 
     const metroField = fields.find(({ isMetro }) => isMetro) ?? fields[1];
@@ -33710,7 +33711,7 @@ module.exports = ({ description, fields, tempo, title }) => {
       tempo: tempo / metroField.pattern.steps * 4,
     });
 
-    field.each(function(d) {
+    field.each(function (d) {
       let started = false;
       const player = new Tone.Player(`audio/${d.sample}`).toDestination();
       const layer = beet.layer(
