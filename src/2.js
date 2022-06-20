@@ -40,7 +40,7 @@ const title = 'Animals As Leaders, “Wave of Babies”';
 
 const description = `
   Circles from innermost to outermost: whole notes, half notes, quarter notes,
-  riff groupings measured in sixteenth notes: 5, 5, 9, 9, 7, 5, 5, 9, 10.
+  eighth notes, riff groupings measured in sixteenth notes: 5, 5, 9, 9, 7, 5, 5, 9, 10.
 `;
 
 makePolyrhythm({ description, fields, tempo, title })
