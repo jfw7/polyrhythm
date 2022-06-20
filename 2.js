@@ -33591,15 +33591,21 @@ const fields = [
   },
   {
     color: '#591C0B',
-    pattern: 16,
-    radius: 0.45,
+    pattern: 32,
+    radius: 0.5,
     sample: 'Hat-Toefy.wav',
+  },
+  {
+    color: '#2D3544',
+    pattern: 16,
+    radius: 0.4,
+    sample: 'clave.wav',
     isMetro: true,
   },
   {
     color: '#004E7C',
     pattern: 8,
-    radius: 0.33,
+    radius: 0.3,
     sample: 'Perc-Koebal.wav',
   },
   {
