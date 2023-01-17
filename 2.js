@@ -33587,7 +33587,7 @@ const fields = [
     color: '#B73225',
     pattern: '1000010000100000000100000000100000010000100001000000001000000000',
     radius: 0.6,
-    sample: 'Snare-Dittie.wav',
+    sample: '573511__gamedrix974__53.wav',
   },
   {
     color: '#591C0B',
@@ -33628,11 +33628,8 @@ const description = `
 makePolyrhythm({ description, fields, tempo, title })
 
 },{"./polyrhythm":46}],46:[function(require,module,exports){
-const Beet = require('beet.js');
-const Layer = require('beet.js/lib/layer');
-const Pattern = require('beet.js/lib/pattern');
 const d3 = require('d3');
-const Tone = require('tone');
+const Pattern = require('beet.js/lib/pattern');
 
 module.exports = ({ description, fields, tempo, title }) => {
   fields = fields.map(({ pattern, ...field }) => ({ ...field, pattern: new Pattern(pattern) }));
@@ -33708,12 +33705,19 @@ module.exports = ({ description, fields, tempo, title }) => {
     .text(d => d.step);
 
   document.querySelector('button').addEventListener('click', async function () {
+    const Beet = require('beet.js');
+    const Layer = require('beet.js/lib/layer');
+    const Tone = require('tone');
+
     await Tone.start();
 
     const metroField = fields.find(({ isMetro }) => isMetro) ?? fields[1];
 
+    const context = Tone.context;
+    context.lookAhead = 0;
+
     const beet = new Beet({
-      context: Tone.context,
+      context: context,
       tempo: tempo / metroField.pattern.steps * 4,
     });
 
