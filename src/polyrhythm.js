@@ -1,8 +1,5 @@
-const Beet = require('beet.js');
-const Layer = require('beet.js/lib/layer');
-const Pattern = require('beet.js/lib/pattern');
 const d3 = require('d3');
-const Tone = require('tone');
+const Pattern = require('beet.js/lib/pattern');
 
 module.exports = ({ description, fields, tempo, title }) => {
   fields = fields.map(({ pattern, ...field }) => ({ ...field, pattern: new Pattern(pattern) }));
@@ -78,12 +75,19 @@ module.exports = ({ description, fields, tempo, title }) => {
     .text(d => d.step);
 
   document.querySelector('button').addEventListener('click', async function () {
+    const Beet = require('beet.js');
+    const Layer = require('beet.js/lib/layer');
+    const Tone = require('tone');
+
     await Tone.start();
 
     const metroField = fields.find(({ isMetro }) => isMetro) ?? fields[1];
 
+    const context = Tone.context;
+    context.lookAhead = 0;
+
     const beet = new Beet({
-      context: Tone.context,
+      context: context,
       tempo: tempo / metroField.pattern.steps * 4,
     });
 
